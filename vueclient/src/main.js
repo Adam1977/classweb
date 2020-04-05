@@ -15,21 +15,22 @@ Vue.prototype.$reqs = axios;
 // 添加响应拦截器
 axios.interceptors.response.use(function (response) {
     // 对响应数据做点什么
-    if(response.data.err){
-		alert(response.data.err);
-		return Promise.reject(response);
-	}else if(response.data.redirect){
-		alert("请先登录..");
-		window.location.href = "#/";
-		return Promise.reject(response);
-	}else{
-		//返回response继续执行后面的操作
-		return response;
-	}
-  }, function (error) {
-    // 对响应错误做点什么
-    return Promise.reject(error);
-  });
+    // if(response.data.err){
+    //   alert(response.data.err);
+    //   return Promise.reject(response);
+    // }else if(response.data.redirect){
+    //   alert("请先登录..");
+    //   window.location.href = "#/";
+    //   return Promise.reject(response);
+    // }else{
+    //   //返回response继续执行后面的操作
+    //   return response;
+    // }
+    return response;
+}, function (error) {
+  // 对响应错误做点什么
+  return Promise.reject(error);
+});
 
 
 /* eslint-disable no-new */

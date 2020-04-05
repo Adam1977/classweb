@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Login from '@/components/login'
 import backIndex from '@/components/backIndex'
 import courseList from '@/components/courseList'
 import indexContent from '@/components/indexContent'
@@ -16,7 +15,7 @@ export default new Router({
     {
       path: '/',
       name: 'Login',
-      component: Login
+      component: () => import('@/components/login')
     },{
 	    path: '/backIndex', //首页框架
 	    name: 'backIndex',

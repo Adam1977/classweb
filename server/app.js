@@ -13,11 +13,11 @@ var app = express();
 
 //跨域  后期删
 app.all('*', function(req, res, next) {
-	res.header("Access-Control-Allow-Origin", "http://localhost:8080"); //为了跨域保持session，所以指定地址，不能用*
+	res.header("Access-Control-Allow-Origin", "http://localhost:9090"); //为了跨域保持session，所以指定地址，不能用*
     res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
     res.header("Access-Control-Allow-Headers", "X-Requested-With");
     res.header('Access-Control-Allow-Headers', 'Content-Type');
-    res.header('Access-Control-Allow-Credentials', true); 
+    res.header('Access-Control-Allow-Credentials', true);
     next();
 });
 
@@ -36,17 +36,18 @@ app.use(session({
 app.use(function(req, res, next){
 
 	//后台请求
-	if(req.session.username){ //表示已经登录后台
-		next();
-	}else if( req.url.indexOf("login") >=0 || req.url.indexOf("logout") >= 0){
-		//登入，登出不需要登录
-		next();
-	}else{
-		//next(); //TODO:这里是调试的时候打开的，以后需要删掉
-		res.end('{"redirect":"true"}');
-		
-	};
-    
+	// if(req.session.username){ //表示已经登录后台
+	// 	next();
+	// }else if( req.url.indexOf("login") >=0 || req.url.indexOf("logout") >= 0){
+	// 	//登入，登出不需要登录
+	// 	next();
+	// }else{
+	// 	//next(); //TODO:这里是调试的时候打开的，以后需要删掉
+	// 	res.end('{"redirect":"true"}');
+	//
+	// };
+    next()
+
 });
 
 

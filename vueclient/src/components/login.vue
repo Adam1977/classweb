@@ -14,12 +14,12 @@
 			</div>
 			<button :disabled="disablebtn" class="login" @click="login">{{loginText}}</button>
 		</div>
-		
+
   </div>
 </template>
 
 <script>
-	
+
 	export default {
 	  name: 'backlogin',
 	  data () {
@@ -30,6 +30,11 @@
 				loginText:"登录"
 	    }
 	  },
+    created() {
+      // this.$reqs.get("/getInfo",{}).then(res => {
+      //   console.log('res----', res)
+      // })
+    },
 	  methods:{
 			login(){
 				var _this = this;
@@ -39,22 +44,23 @@
 				this.$reqs.post("/users/login",{
 						username:this.username,
 						password:this.password
-				}).then(function(result){ 
+				}).then(function(result){
 					//成功
-					if(result.data.err){
-						alert(result.data.err);
+					if(result.data.code === 0){
+            // _this.$router.push({path:'/backIndex/indexContent'});
+            _this.$router.push({path:'/indexContent'});
 					}else{
-						_this.$router.push({path:'/backIndex/indexContent'});
+            alert(result.data.msg);
 					}
 					_this.disablebtn = false;
 					_this.loginText = "登录";
-					
+
 				}).catch(function (error) {
 					//失败
 			    	_this.disablebtn = false;
 					_this.loginText = "登录"
 				});
-				
+
 			}
 		}
 	}
@@ -98,7 +104,7 @@
 	.login_other{
 		overflow: hidden;
 	}
-	
+
 	.login_other a{
 		float: right;
 		color: #727f8f;
@@ -144,9 +150,9 @@
 		text-align: center;
 		margin: 0 0 20px 0;
 	}
-	
-	
-	
+
+
+
 	@media only screen and (max-width: 768px) {
 		.header img{
 			width: 100px;
